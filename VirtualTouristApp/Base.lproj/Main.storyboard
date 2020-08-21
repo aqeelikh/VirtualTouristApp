@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mvV-dt-pQr">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,7 +13,7 @@
             <objects>
                 <navigationController id="mvV-dt-pQr" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pc0-aH-KTN">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -24,16 +24,16 @@
             </objects>
             <point key="canvasLocation" x="-1898" y="-523"/>
         </scene>
-        <!--View Controller-->
+        <!--Travel Locations Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="VirtualTouristApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TravelLocationsMapViewController" customModule="VirtualTouristApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-Ka-ykS">
-                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -51,67 +51,88 @@
             </objects>
             <point key="canvasLocation" x="-678" y="-524"/>
         </scene>
-        <!--View Controller-->
+        <!--Photo Album View View Controller-->
         <scene sceneID="D7u-XO-1gd">
             <objects>
-                <viewController id="aMv-nA-WrK" sceneMemberID="viewController">
+                <viewController id="aMv-nA-WrK" customClass="PhotoAlbumViewViewController" customModule="VirtualTouristApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZtM-sP-GX5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="fPb-t3-cuO">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tbI-eG-ITW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1mY-bY-zTj">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="fPb-t3-cuO">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
+                                        <subviews>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1mY-bY-zTj">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="ka7-iY-Tdf"/>
+                                                </constraints>
+                                            </mapView>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ckI-TS-VCQ">
+                                                <rect key="frame" x="0.0" y="268" width="375" height="339"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yZp-md-4uu">
+                                                    <size key="itemSize" width="128" height="128"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KIG-Sg-ni6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ens-14-cI4">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </collectionViewCellContentView>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="ka7-iY-Tdf"/>
+                                            <constraint firstItem="1mY-bY-zTj" firstAttribute="leading" secondItem="fPb-t3-cuO" secondAttribute="leading" id="H1C-p8-25D"/>
+                                            <constraint firstItem="1mY-bY-zTj" firstAttribute="top" secondItem="fPb-t3-cuO" secondAttribute="top" id="OWq-eV-78a"/>
+                                            <constraint firstAttribute="trailing" secondItem="1mY-bY-zTj" secondAttribute="trailing" id="P6U-cZ-8YH"/>
+                                            <constraint firstAttribute="trailing" secondItem="ckI-TS-VCQ" secondAttribute="trailing" id="Tfp-7L-pbV"/>
+                                            <constraint firstItem="ckI-TS-VCQ" firstAttribute="leading" secondItem="fPb-t3-cuO" secondAttribute="leading" id="ham-VO-Gx6"/>
+                                            <constraint firstAttribute="bottom" secondItem="ckI-TS-VCQ" secondAttribute="bottom" id="kRt-mK-JiC"/>
                                         </constraints>
-                                    </mapView>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ckI-TS-VCQ">
-                                        <rect key="frame" x="0.0" y="268" width="375" height="466"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yZp-md-4uu">
-                                            <size key="itemSize" width="128" height="128"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KIG-Sg-ni6">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ens-14-cI4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                        </cells>
-                                    </collectionView>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKY-V2-MET">
+                                        <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                        <color key="backgroundColor" white="0.92296618254507024" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="vwH-aC-mm4"/>
+                                        </constraints>
+                                        <state key="normal" title="New Collection"/>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="1mY-bY-zTj" firstAttribute="leading" secondItem="fPb-t3-cuO" secondAttribute="leading" id="H1C-p8-25D"/>
-                                    <constraint firstItem="1mY-bY-zTj" firstAttribute="top" secondItem="fPb-t3-cuO" secondAttribute="top" id="OWq-eV-78a"/>
-                                    <constraint firstAttribute="trailing" secondItem="1mY-bY-zTj" secondAttribute="trailing" id="P6U-cZ-8YH"/>
-                                    <constraint firstAttribute="trailing" secondItem="ckI-TS-VCQ" secondAttribute="trailing" id="Tfp-7L-pbV"/>
-                                    <constraint firstItem="ckI-TS-VCQ" firstAttribute="leading" secondItem="fPb-t3-cuO" secondAttribute="leading" id="ham-VO-Gx6"/>
-                                    <constraint firstAttribute="bottom" secondItem="ckI-TS-VCQ" secondAttribute="bottom" id="kRt-mK-JiC"/>
+                                    <constraint firstItem="SKY-V2-MET" firstAttribute="top" secondItem="fPb-t3-cuO" secondAttribute="bottom" id="4Oz-31-mj9"/>
+                                    <constraint firstItem="fPb-t3-cuO" firstAttribute="top" secondItem="tbI-eG-ITW" secondAttribute="top" id="7Fp-az-s3a"/>
+                                    <constraint firstAttribute="trailing" secondItem="SKY-V2-MET" secondAttribute="trailing" id="Tyb-7v-tpU"/>
+                                    <constraint firstItem="fPb-t3-cuO" firstAttribute="leading" secondItem="tbI-eG-ITW" secondAttribute="leading" id="VRR-2o-xWt"/>
+                                    <constraint firstItem="SKY-V2-MET" firstAttribute="leading" secondItem="tbI-eG-ITW" secondAttribute="leading" id="aIr-Bv-y35"/>
+                                    <constraint firstAttribute="trailing" secondItem="fPb-t3-cuO" secondAttribute="trailing" id="dhH-Qf-mOr"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="fPb-t3-cuO" firstAttribute="top" secondItem="1KZ-Tk-nZr" secondAttribute="top" id="4ru-WJ-0Dl"/>
-                            <constraint firstItem="fPb-t3-cuO" firstAttribute="leading" secondItem="1KZ-Tk-nZr" secondAttribute="leading" id="6Eh-Sm-dpT"/>
-                            <constraint firstItem="1KZ-Tk-nZr" firstAttribute="bottom" secondItem="fPb-t3-cuO" secondAttribute="bottom" id="GQh-eQ-Avb"/>
-                            <constraint firstItem="1KZ-Tk-nZr" firstAttribute="trailing" secondItem="fPb-t3-cuO" secondAttribute="trailing" id="THY-Vg-8kf"/>
+                            <constraint firstItem="tbI-eG-ITW" firstAttribute="leading" secondItem="ZtM-sP-GX5" secondAttribute="leading" id="Hd0-ma-om7"/>
+                            <constraint firstAttribute="bottom" secondItem="tbI-eG-ITW" secondAttribute="bottom" id="NXz-1S-Fkv"/>
+                            <constraint firstItem="tbI-eG-ITW" firstAttribute="top" secondItem="1KZ-Tk-nZr" secondAttribute="top" id="XoY-gP-uFi"/>
+                            <constraint firstItem="1KZ-Tk-nZr" firstAttribute="trailing" secondItem="tbI-eG-ITW" secondAttribute="trailing" id="sLL-Al-DIC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1KZ-Tk-nZr"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0zC-P6-kxU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="472" y="-524"/>
+            <point key="canvasLocation" x="250" y="-525"/>
         </scene>
     </scenes>
 </document>
