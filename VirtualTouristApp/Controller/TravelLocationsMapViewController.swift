@@ -100,7 +100,6 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
             // Here we create the annotation and set its coordiate, title, and subtitle properties
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
-            annotation.title = "FUCK YEAAAAH!!"
           
             // Finally we place the annotation in an array of annotations.
             annotations.append(annotation)
@@ -126,6 +125,12 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
             annotationView!.annotation = annotation
         }
         return annotationView
+    }
+    
+    //MARK:- Clikc on map annotation to get location image
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("annotation latitude :\(String(describing: view.annotation?.coordinate.latitude)) ")
+        print("annotation longitude :\(String(describing: view.annotation?.coordinate.longitude)) ")
     }
     
     func setUpRegin(latitude:Float,longitud:Float){
