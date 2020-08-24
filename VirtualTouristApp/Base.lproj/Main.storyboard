@@ -48,7 +48,7 @@
                     <navigationItem key="navigationItem" id="7bx-Cu-Dvf"/>
                     <connections>
                         <outlet property="mapView" destination="KPx-Ka-ykS" id="2jV-Z1-Utb"/>
-                        <segue destination="aMv-nA-WrK" kind="show" identifier="PAV" id="gLv-Qf-Ryc"/>
+                        <segue destination="aMv-nA-WrK" kind="show" identifier="PAVC" id="gLv-Qf-Ryc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -58,7 +58,7 @@
         <!--Photo Album View View Controller-->
         <scene sceneID="D7u-XO-1gd">
             <objects>
-                <viewController id="aMv-nA-WrK" customClass="PhotoAlbumViewViewController" customModule="VirtualTouristApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PAVC" id="aMv-nA-WrK" customClass="PhotoAlbumViewViewController" customModule="VirtualTouristApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZtM-sP-GX5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,19 +79,40 @@
                                                 <rect key="frame" x="0.0" y="200" width="414" height="432"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yZp-md-4uu">
-                                                    <size key="itemSize" width="128" height="128"/>
+                                                    <size key="itemSize" width="195" height="195"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KIG-Sg-ni6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="FlickerCollectionViewCell" id="KIG-Sg-ni6" customClass="FlickerCollectionViewCell" customModule="VirtualTouristApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ens-14-cI4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7IK-Vj-7Aw">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="180" id="9Oy-2S-tj8" userLabel="width = 180"/>
+                                                                        <constraint firstAttribute="height" constant="180" id="L38-nS-oUq"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="7IK-Vj-7Aw" secondAttribute="bottom" id="5jw-7a-rKO"/>
+                                                                <constraint firstItem="7IK-Vj-7Aw" firstAttribute="centerY" secondItem="ens-14-cI4" secondAttribute="centerY" id="AR8-3U-cen"/>
+                                                                <constraint firstItem="7IK-Vj-7Aw" firstAttribute="top" secondItem="ens-14-cI4" secondAttribute="top" id="Eza-bN-wOK"/>
+                                                                <constraint firstItem="7IK-Vj-7Aw" firstAttribute="centerX" secondItem="ens-14-cI4" secondAttribute="centerX" id="KTo-O3-MWg"/>
+                                                                <constraint firstAttribute="trailing" secondItem="7IK-Vj-7Aw" secondAttribute="trailing" id="Rle-qA-BrY"/>
+                                                                <constraint firstItem="7IK-Vj-7Aw" firstAttribute="leading" secondItem="ens-14-cI4" secondAttribute="leading" id="tYt-W8-CMl"/>
+                                                            </constraints>
                                                         </collectionViewCellContentView>
+                                                        <size key="customSize" width="195" height="195"/>
+                                                        <connections>
+                                                            <outlet property="flickerImage" destination="7IK-Vj-7Aw" id="GuG-Ud-6PE"/>
+                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
@@ -134,10 +155,14 @@
                         <viewLayoutGuide key="safeArea" id="1KZ-Tk-nZr"/>
                     </view>
                     <navigationItem key="navigationItem" id="yre-CR-IAz"/>
+                    <connections>
+                        <outlet property="flickerCollectionView" destination="ckI-TS-VCQ" id="Xb0-gU-xsR"/>
+                        <outlet property="mapView" destination="1mY-bY-zTj" id="uij-Xk-EDo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0zC-P6-kxU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-167" y="-523"/>
+            <point key="canvasLocation" x="-168.11594202898553" y="-523.36956521739137"/>
         </scene>
     </scenes>
 </document>

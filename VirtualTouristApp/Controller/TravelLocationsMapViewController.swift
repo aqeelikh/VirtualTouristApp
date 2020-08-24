@@ -33,7 +33,7 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             pins = result
             mapView.removeAnnotations(mapView.annotations)
-            updateMapPins(result: pins)
+            updateMapPins(pin: pins)
         }
         configrLongPressGestureForMap()
     }
@@ -79,9 +79,9 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
     
     
     //MARK:- Update pins in MapView
-    func updateMapPins(result:[Pin]){
+    func updateMapPins(pin:[Pin]){
         // data that you can download from parse.
-        let locations = result
+        let locations = pin
         
         // We will create an MKPointAnnotation for each dictionary in "locations". The
         // point annotations will be stored in this array, and then provided to the map view.
@@ -129,6 +129,13 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
     
     //MARK:- Clikc on map annotation to get location image
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        let vcSugue = self.storyboard?.instantiateViewController(identifier: "PAVC") as! PhotoAlbumViewViewController
+        vcSugue.annotation = view.annotation
+        
+        vcSugue.dataController = dataController
+        self.show(vcSugue, sender: nil)
+        
         print("annotation latitude :\(String(describing: view.annotation?.coordinate.latitude)) ")
         print("annotation longitude :\(String(describing: view.annotation?.coordinate.longitude)) ")
     }

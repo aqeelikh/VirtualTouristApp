@@ -15,6 +15,8 @@
 		C5056E2E24F056F100754AA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5056E2C24F056F100754AA1 /* LaunchScreen.storyboard */; };
 		C5056E3A24F08AF500754AA1 /* PhotoAlbumViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5056E3924F08AF500754AA1 /* PhotoAlbumViewViewController.swift */; };
 		C545D48824F26DDE00F61384 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C545D48724F26DDD00F61384 /* SceneDelegate.swift */; };
+		C545D48B24F2C2A500F61384 /* FlickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C545D48A24F2C2A500F61384 /* FlickerCollectionViewCell.swift */; };
+		C545D48E24F2D57A00F61384 /* FlickrRespons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C545D48D24F2D57A00F61384 /* FlickrRespons.swift */; };
 		C5EDA94324F25A9700BCB741 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EDA94224F25A9700BCB741 /* DataController.swift */; };
 		C5EDA94624F2607600BCB741 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EDA94524F2607600BCB741 /* APIClient.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +32,8 @@
 		C5056E2F24F056F100754AA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5056E3924F08AF500754AA1 /* PhotoAlbumViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewViewController.swift; sourceTree = "<group>"; };
 		C545D48724F26DDD00F61384 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C545D48A24F2C2A500F61384 /* FlickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerCollectionViewCell.swift; sourceTree = "<group>"; };
+		C545D48D24F2D57A00F61384 /* FlickrRespons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrRespons.swift; sourceTree = "<group>"; };
 		C5EDA94224F25A9700BCB741 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		C5EDA94524F2607600BCB741 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +68,7 @@
 		C5056E1D24F056F000754AA1 /* VirtualTouristApp */ = {
 			isa = PBXGroup;
 			children = (
+				C545D48924F2C1B600F61384 /* View */,
 				C5056E1E24F056F000754AA1 /* AppDelegate.swift */,
 				C545D48724F26DDD00F61384 /* SceneDelegate.swift */,
 				C5056E3624F08A2C00754AA1 /* Model */,
@@ -95,9 +100,26 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C545D48924F2C1B600F61384 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C545D48A24F2C2A500F61384 /* FlickerCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C545D48C24F2D55900F61384 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				C545D48D24F2D57A00F61384 /* FlickrRespons.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
 		C5EDA94424F2606500BCB741 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				C545D48C24F2D55900F61384 /* Responses */,
 				C5EDA94524F2607600BCB741 /* APIClient.swift */,
 			);
 			path = Client;
@@ -175,10 +197,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5056E2924F056F000754AA1 /* VirtualTouristApp.xcdatamodeld in Sources */,
+				C545D48B24F2C2A500F61384 /* FlickerCollectionViewCell.swift in Sources */,
 				C545D48824F26DDE00F61384 /* SceneDelegate.swift in Sources */,
 				C5EDA94624F2607600BCB741 /* APIClient.swift in Sources */,
 				C5EDA94324F25A9700BCB741 /* DataController.swift in Sources */,
 				C5056E2324F056F000754AA1 /* TravelLocationsMapViewController.swift in Sources */,
+				C545D48E24F2D57A00F61384 /* FlickrRespons.swift in Sources */,
 				C5056E1F24F056F000754AA1 /* AppDelegate.swift in Sources */,
 				C5056E3A24F08AF500754AA1 /* PhotoAlbumViewViewController.swift in Sources */,
 			);
