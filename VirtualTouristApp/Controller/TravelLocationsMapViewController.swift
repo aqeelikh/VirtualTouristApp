@@ -183,12 +183,13 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
     
     @IBAction func pickARandomPin(_ sender: Any) {
         
-        let vcSugue = self.storyboard?.instantiateViewController(identifier: "randomPin") as! RandomPinViewController
-
-        vcSugue.dataController = self.dataController
-        vcSugue.pins = self.pins
-       
-        self.show(vcSugue, sender: nil)
-
+        if pins.isEmpty {
+            self.showAlert(message: "No Pins Downloaded")
+        }else{
+             let vcSugue = self.storyboard?.instantiateViewController(identifier: "randomPin") as! RandomPinViewController
+             vcSugue.dataController = self.dataController
+             vcSugue.pins = self.pins
+             self.show(vcSugue, sender: nil)
+        }
     }
 }

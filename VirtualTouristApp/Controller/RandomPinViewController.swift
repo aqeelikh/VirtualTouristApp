@@ -27,7 +27,7 @@ class RandomPinViewController: UIViewController,MKMapViewDelegate {
     var pins:[Pin] = []
     var pin:Pin?
     var photoArray:[Photo] = []
-
+    var locationInformation:String = ""
     
     func setupUI(){
         pickARandomPin(pins: pins)
@@ -37,6 +37,7 @@ class RandomPinViewController: UIViewController,MKMapViewDelegate {
     }
     
     func pickARandomPin(pins:[Pin]){
+        
         let randomPinIndex = Int.random(in: 0 ... pins.count-1)
         pin = pins[randomPinIndex]
         print(pins[randomPinIndex])
@@ -139,12 +140,7 @@ class RandomPinViewController: UIViewController,MKMapViewDelegate {
 
                 if pm.count > 0 {
                     let pm = placemarks![0]
-                    print(pm.country)
-                    print(pm.locality)
-                    print(pm.subLocality)
-                    print(pm.thoroughfare)
-                    print(pm.postalCode)
-                    print(pm.subThoroughfare)
+                    
                     var addressString : String = ""
                     if pm.subLocality != nil {
                         addressString = addressString + pm.subLocality! + ", "
@@ -161,6 +157,7 @@ class RandomPinViewController: UIViewController,MKMapViewDelegate {
                     if pm.postalCode != nil {
                         addressString = addressString + pm.postalCode! + " "
                     }
+                    self.locationInformation = addressString
                     print(addressString)
               }
         })
