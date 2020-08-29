@@ -13,10 +13,9 @@ import CoreData
 class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
 
     var dataController:DataController!
-    
     var fetchedResultsController:NSFetchedResultsController<Pin>!
-
     var pins:[Pin] = []
+    var lastLocation: [String: Double] = [:]
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -40,18 +39,15 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
     
     override func viewWillAppear(_ animated: Bool) {
         //MARK:- Get annotation from coredata
+        self.saveLastLocation()
     }
     
-    //MARK:- TODO CHANGE and refactore the code
     @objc func handleTapping(gestureRecognion: UIGestureRecognizer) {
         
         if gestureRecognion.state == UIGestureRecognizer.State.began {
             let location = gestureRecognion.location(in: mapView)
             let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
-            
-            print("location longitude: \(coordinate.longitude), location latitude: \(coordinate.latitude)")
-            
-            // Add annotation:
+                        
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             mapView.addAnnotation(annotation)
@@ -76,21 +72,14 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
         mapView.addGestureRecognizer(gestureRecognion)
     }
 
-    //MARK:- TODO add pinch and drag gestures.
-    
-    
     //MARK:- Update pins in MapView
     func updateMapPins(pin:[Pin]){
-        // data that you can download from parse.
         let locations = pin
-        
-        // We will create an MKPointAnnotation for each dictionary in "locations". The
-        // point annotations will be stored in this array, and then provided to the map view.
+    
         var annotations = [MKPointAnnotation]()
         
         for dictionary in locations {
             
-            // Notice that the float values are being used to create CLLocationDegree values.
             // This is a version of the Double type.
             let lat = CLLocationDegrees(dictionary.latitude)
             let long = CLLocationDegrees(dictionary.longitude)
@@ -102,7 +91,7 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
           
-            // Finally we place the annotation in an array of annotations.
+            // Place the annotation in an array of annotations.
             annotations.append(annotation)
         }
     
@@ -157,5 +146,38 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         mapView.setRegion(region, animated: true)
     }
+    
+    
+    func saveLastLocation() {
+        if let lastLocation =  UserDefaults.standard.object(forKey: "mapLastLocation") {
+            // Cast Any to [String:Double]
+            let userMapViewLastLocation = lastLocation as! [String:Double]
 
+            // Save user zoom level
+            let latitudeSpan = CLLocationDegrees(userMapViewLastLocation["regionLatitude"]!)
+            let longitudeSpan = CLLocationDegrees(userMapViewLastLocation["regionLongitude"]!)
+            
+            
+            // Save user mapView center
+            let latitudeCenter = CLLocationDegrees(userMapViewLastLocation["centerLatitude"]!)
+            let longitudeCenter = CLLocationDegrees(userMapViewLastLocation["centerLongitude"]!)
+            
+            // Configure user mapView region
+            let mapViewSpan = MKCoordinateSpan(latitudeDelta: latitudeSpan, longitudeDelta: longitudeSpan)
+            let mapViewCenter = CLLocationCoordinate2D(latitude: latitudeCenter, longitude: longitudeCenter)
+            
+            mapView.region = MKCoordinateRegion(center: mapViewCenter, span: mapViewSpan)
+        }
+    }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        
+        lastLocation["centerLatitude"] = Double(mapView.region.center.latitude)
+        lastLocation["centerLongitude"] = Double(mapView.region.center.longitude)
+        
+        lastLocation["regionLatitude"] = Double(mapView.region.span.latitudeDelta)
+        lastLocation["regionLongitude"] = Double(mapView.region.span.longitudeDelta)
+        
+        UserDefaults.standard.set(lastLocation, forKey: "mapLastLocation")
+    }
 }

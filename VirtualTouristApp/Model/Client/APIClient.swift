@@ -11,7 +11,7 @@ import Foundation
 
 class APIClient {
     
-    static let key:String = ""
+    static let key:String = "d600bfad28e89aab6956f2c36c42db75"
     
     // Constract the URL for the Flicker API end point
     enum Endpoint {
@@ -21,12 +21,14 @@ class APIClient {
         static let apiKey = "api_key="
         static let lat = "lat="
         static let lon = "lon="
-
+        static let page = "page="
     }
     
-    class func getImages(latitude:Double , longtuid:Double,completion: @escaping (FlickrRespons?, Error?) -> Void) {
+    class func getImages(latitude:Double , longtuid:Double,range:Int,completion: @escaping (FlickrRespons?, Error?) -> Void) {
         
-        let request = URLRequest(url: self.composeURL(latitude, longtuid))
+        let randomPage = Int.random(in: 1 ... range)
+
+        let request = URLRequest(url: self.composeURL(latitude, longtuid,randomPage))
            let session = URLSession.shared.dataTask(with: request) { data, response, error in
              if error != nil { // Handle error...
                  return
@@ -39,7 +41,6 @@ class APIClient {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    
                    print(error.localizedDescription)
             }
         }
@@ -47,9 +48,9 @@ class APIClient {
         session.resume()
     }
     
-    class func composeURL(_ latitude:Double,_ longtuid:Double) -> URL {
+    class func composeURL(_ latitude:Double,_ longtuid:Double, _ randomPage:Int) -> URL {
         
-        let url:String = Endpoint.base + Endpoint.urlMethod + "&" + Endpoint.format + "&" + Endpoint.apiKey + key + "&" + Endpoint.lat + "\(latitude)" + "&" + Endpoint.lon + "\(longtuid)" + "&nojsoncallback=1&accuracy=11&per_page=20"
+        let url:String = Endpoint.base + Endpoint.urlMethod + "&" + Endpoint.format + "&" + Endpoint.apiKey + key + "&" + Endpoint.lat + "\(latitude)" + "&" + Endpoint.lon + "\(longtuid)" + "&nojsoncallback=1&accuracy=11&per_page=20" + "&" + Endpoint.page + "\(randomPage)"
         print(url)
         return URL(string: url)!
 

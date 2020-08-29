@@ -12,7 +12,7 @@ import UIKit
 extension UIViewController{
     
      func showAlert(message:String){
-         let alertController = UIAlertController(title: "On The Map", message: message, preferredStyle: .alert)
+         let alertController = UIAlertController(title: "Virtual Tourist App", message: message, preferredStyle: .alert)
              alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
          self.present(alertController, animated: true, completion: nil)
              }
