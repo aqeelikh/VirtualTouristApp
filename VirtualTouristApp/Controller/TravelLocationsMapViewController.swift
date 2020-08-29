@@ -65,6 +65,7 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
             let pin = Pin(context: dataController.viewContext)
             pin.longitude = lon
             pin.latitude = lat
+            pins.append(pin)
             try? dataController.viewContext.save()
        }
 
@@ -129,17 +130,25 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
     
     //MARK:- Clikc on map annotation to get location image
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
+        if let coordinate = view.annotation?.coordinate {
         let vcSugue = self.storyboard?.instantiateViewController(identifier: "PAVC") as! PhotoAlbumViewViewController
+            
+        let latitude = Double(coordinate.latitude)
+        let longitude = Double(coordinate.longitude)
+            
         vcSugue.annotation = view.annotation
-        
         vcSugue.dataController = dataController
+                
+       for pin in pins {
+        if pin.latitude == latitude && pin.longitude == longitude {
+            vcSugue.pin = pin
+            }
+        }
         self.show(vcSugue, sender: nil)
-        
-        print("annotation latitude :\(String(describing: view.annotation?.coordinate.latitude)) ")
-        print("annotation longitude :\(String(describing: view.annotation?.coordinate.longitude)) ")
     }
-    
+        
+    }
+        
     func setUpRegin(latitude:Float,longitud:Float){
         let lat = CLLocationDegrees(latitude)
         let long = CLLocationDegrees(longitud)
@@ -148,6 +157,5 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         mapView.setRegion(region, animated: true)
     }
-    
-}
 
+}

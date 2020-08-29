@@ -8,31 +8,30 @@
 
 import Foundation
 
-extension APIClient {
+
     
     // MARK: - JSONFlickrAPI
-    struct JSONFlickrAPI: Codable {
-        let photos: Photos
-        let stat: String
-    }
+struct FlickrRespons: Codable {
+    let photos: FlickerPhotos
+    let stat: String
+}
 
     // MARK: - Photos
-    struct Photos: Codable {
-        let page, pages, perpage: Int
-        let total: String
-        let photo: [Photo]
-    }
+struct FlickerPhotos: Codable {
+    let page, pages, perpage: Int
+    let total: String
+    let photo: [FlickerPhoto]
+}
 
     // MARK: - Photo
-    struct Photo: Codable {
-        let id, owner, secret, server: String
-        let farm: Int
-        let title: String
-        let ispublic, isfriend, isfamily: Int
-    }
+struct FlickerPhoto: Codable {
+    let id, owner, secret, server: String
+    let farm: Int
+    let title: String
+    let ispublic, isfriend, isfamily: Int
+}
 
     
     
     
-    
-}
+
