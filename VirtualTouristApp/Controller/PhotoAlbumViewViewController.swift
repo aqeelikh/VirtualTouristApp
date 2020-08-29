@@ -28,7 +28,7 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
     
     @IBOutlet weak var flickerCollectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var updateCollectionViewBtn: UIButton!
     
     override func viewDidLoad() {
         
@@ -39,6 +39,7 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
         // Do any additional setup after loading the view.
         setUpRegin(latitude: (annotation?.coordinate.latitude)! , longitud: (annotation?.coordinate.longitude)!)
         fetchImagesFromDB()
+        updateCollectionViewBtn.isEnabled = false
     }
     
     
@@ -61,6 +62,7 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
         } else {
             showAlert(message:"Error: no photos deleted")
         }
+        updateCollectionViewBtn.isEnabled = true
         try? dataController.viewContext.save()
     }
     
@@ -71,6 +73,7 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
         fetchRequest.predicate = NSPredicate(format: "pin = %@", pin)
         
         if let results = try? dataController.viewContext.fetch(fetchRequest), results.count != 0 {
+               self.updateCollectionViewBtn.isEnabled = true
                photoArray = results
            } else {
                fetchFlickerPhotos()
@@ -124,6 +127,7 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
         if imageArray.count == 0 {
                 showAlert(message: "No images to load choose another location")
         }
+        self.updateCollectionViewBtn.isEnabled = true
     }
     
     //MARK: Core Data
@@ -149,7 +153,7 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
         let photoCell = photoArray[indexPath.row]
         
         cell.flickerImage.kf.setImage(with: photoCell.url)
-        
+        self.updateCollectionViewBtn.isEnabled = true
         return cell
     }
     

@@ -161,6 +161,7 @@
                     <connections>
                         <outlet property="flickerCollectionView" destination="ckI-TS-VCQ" id="Xb0-gU-xsR"/>
                         <outlet property="mapView" destination="1mY-bY-zTj" id="uij-Xk-EDo"/>
+                        <outlet property="updateCollectionViewBtn" destination="SKY-V2-MET" id="r3J-as-eNp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0zC-P6-kxU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
