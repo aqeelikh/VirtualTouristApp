@@ -24,10 +24,6 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
         // Do any additional setup after loading the view.
         mapView.delegate = self
         
-//        DispatchQueue.main.async {
-//               self.updateMapPins()
-//        }
-        
         let fetchRequest:NSFetchRequest<Pin> = Pin.fetchRequest()
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             pins = result
@@ -179,5 +175,20 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
         lastLocation["regionLongitude"] = Double(mapView.region.span.longitudeDelta)
         
         UserDefaults.standard.set(lastLocation, forKey: "mapLastLocation")
+    }
+    
+    
+    
+    //MARK:- Pick a rondom Pin
+    
+    @IBAction func pickARandomPin(_ sender: Any) {
+        
+        let vcSugue = self.storyboard?.instantiateViewController(identifier: "randomPin") as! RandomPinViewController
+
+        vcSugue.dataController = self.dataController
+        vcSugue.pins = self.pins
+       
+        self.show(vcSugue, sender: nil)
+
     }
 }

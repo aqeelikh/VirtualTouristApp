@@ -66,7 +66,6 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
         try? dataController.viewContext.save()
     }
     
-    //MARK:- TODO:- Refactor fetchImagesFromDB()
     func fetchImagesFromDB(){
         
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()

@@ -35,10 +35,26 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-Ka-ykS">
                                 <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                             </mapView>
+                            <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CS-xX-23G">
+                                <rect key="frame" x="42" y="631" width="328" height="60"/>
+                                <color key="backgroundColor" red="0.30196078430000001" green="0.37647058820000001" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="D6j-YI-9se"/>
+                                </constraints>
+                                <state key="normal" title="Pick Random Image">
+                                    <color key="titleColor" white="0.92296618249999995" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pickARandomPin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KbT-l0-Sji"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3CS-xX-23G" secondAttribute="bottom" constant="45" id="1Pn-no-6Gh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3CS-xX-23G" secondAttribute="trailing" constant="44" id="Gu2-Um-H1a"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KPx-Ka-ykS" secondAttribute="trailing" id="NbH-ML-tZQ"/>
+                            <constraint firstItem="3CS-xX-23G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="42" id="PlX-nE-318"/>
                             <constraint firstItem="KPx-Ka-ykS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mQe-Ly-bMY"/>
                             <constraint firstItem="KPx-Ka-ykS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pSO-eR-JGq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KPx-Ka-ykS" secondAttribute="bottom" id="yGf-zJ-HWk"/>
@@ -49,11 +65,12 @@
                     <connections>
                         <outlet property="mapView" destination="KPx-Ka-ykS" id="2jV-Z1-Utb"/>
                         <segue destination="aMv-nA-WrK" kind="show" identifier="PAVC" id="gLv-Qf-Ryc"/>
+                        <segue destination="6lp-RL-dtI" kind="show" identifier="randomPin" id="xam-l1-76e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1022" y="-523"/>
+            <point key="canvasLocation" x="-1023.75" y="-523.94366197183103"/>
         </scene>
         <!--Photo Album View View Controller-->
         <scene sceneID="D7u-XO-1gd">
@@ -128,11 +145,13 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKY-V2-MET">
                                         <rect key="frame" x="0.0" y="632" width="414" height="60"/>
-                                        <color key="backgroundColor" white="0.92296618254507024" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.30196078431372547" green="0.37647058823529411" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="vwH-aC-mm4"/>
                                         </constraints>
-                                        <state key="normal" title="New Collection"/>
+                                        <state key="normal" title="New Collection">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="collectionViewUpdateButton:" destination="aMv-nA-WrK" eventType="touchUpInside" id="OMA-ki-YOU"/>
                                         </connections>
@@ -167,6 +186,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0zC-P6-kxU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-168.11594202898553" y="-523.36956521739137"/>
+        </scene>
+        <!--Random Pin View Controller-->
+        <scene sceneID="EUY-0m-e4V">
+            <objects>
+                <viewController storyboardIdentifier="randomPin" id="6lp-RL-dtI" customClass="RandomPinViewController" customModule="VirtualTouristApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G5a-tL-kLz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dtb-XM-gca">
+                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qTD-RS-kAK">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="210"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="210" id="dRq-E8-0xF"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="L14-WD-4oI">
+                                        <rect key="frame" x="0.0" y="230" width="414" height="382"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aUR-lI-xRf">
+                                                <rect key="frame" x="0.0" y="0.0" width="172" height="382"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="172" id="Pjf-VS-WRS"/>
+                                                </constraints>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6NP-0d-zx6">
+                                                <rect key="frame" x="180" y="0.0" width="234" height="382"/>
+                                            </mapView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcM-fR-qNd">
+                                        <rect key="frame" x="0.0" y="632" width="414" height="60"/>
+                                        <color key="backgroundColor" red="0.30196078431372547" green="0.37647058823529411" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="zrP-EG-Kr1"/>
+                                        </constraints>
+                                        <state key="normal" title="Another Random Image">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="randomIPinPicker:" destination="6lp-RL-dtI" eventType="touchUpInside" id="Lea-ox-Wfn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="bcM-fR-qNd" firstAttribute="leading" secondItem="dtb-XM-gca" secondAttribute="leading" id="E1n-ua-DQg"/>
+                                    <constraint firstItem="qTD-RS-kAK" firstAttribute="top" secondItem="dtb-XM-gca" secondAttribute="top" id="If4-sg-YCJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="bcM-fR-qNd" secondAttribute="trailing" id="UuX-Cj-FqX"/>
+                                    <constraint firstAttribute="bottom" secondItem="bcM-fR-qNd" secondAttribute="bottom" id="bZd-rb-T31"/>
+                                    <constraint firstAttribute="trailing" secondItem="bcM-fR-qNd" secondAttribute="trailing" id="iTK-Ta-XdN"/>
+                                    <constraint firstAttribute="bottom" secondItem="bcM-fR-qNd" secondAttribute="bottom" id="l9d-h6-z8r"/>
+                                    <constraint firstItem="qTD-RS-kAK" firstAttribute="leading" secondItem="dtb-XM-gca" secondAttribute="leading" id="nyk-wb-fqj"/>
+                                    <constraint firstAttribute="trailing" secondItem="qTD-RS-kAK" secondAttribute="trailing" id="pv2-EM-Jhq"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="tiw-6c-eFr" firstAttribute="trailing" secondItem="dtb-XM-gca" secondAttribute="trailing" id="RoE-Aq-RG7"/>
+                            <constraint firstItem="dtb-XM-gca" firstAttribute="leading" secondItem="tiw-6c-eFr" secondAttribute="leading" id="bj8-EP-Hd5"/>
+                            <constraint firstItem="dtb-XM-gca" firstAttribute="top" secondItem="tiw-6c-eFr" secondAttribute="top" id="eG1-NM-9Mf"/>
+                            <constraint firstItem="tiw-6c-eFr" firstAttribute="bottom" secondItem="dtb-XM-gca" secondAttribute="bottom" id="hje-JU-efj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tiw-6c-eFr"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oe5-Qu-vF9"/>
+                    <connections>
+                        <outlet property="LocationInfoText" destination="aUR-lI-xRf" id="JPq-fF-RRG"/>
+                        <outlet property="mapView" destination="6NP-0d-zx6" id="uxf-J1-nB0"/>
+                        <outlet property="pinRandomImage" destination="qTD-RS-kAK" id="F8E-rb-stZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LWR-19-4eE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1025" y="267"/>
         </scene>
     </scenes>
 </document>
