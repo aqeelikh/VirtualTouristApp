@@ -35,10 +35,7 @@ Once the images have all been downloaded, the app should enable the New Collecti
 <img src="./AppScreenshots/LocationCollectionView.png" width="50%" height="100%" />
 
 
-**Random Pin View**: After the user add location pins to the map view it will serach core data and select a rondom pin, and will pull a random image related to the selected pin, it will also return location dispction. The user also can click on on `Random image` button it will randomly choose another pin. 
-
-
-Random Pin View: After the user adds location pins to the `Mapview` it will search core data and select a random pin, and will pull a random image related to the selected pin, it will also return location description. The user also can click on on `Random image` button it will randomly choose another pin. 
+**Random Pin View**: After the user adds location pins to the `Mapview` it will search core data and select a random pin, and will pull a random image related to the selected pin, it will also return location description. The user also can click on on `Random image` button it will randomly choose another pin. 
 
 <img src="./AppScreenshots/RandomPin.png" width="50%" height="100%" />
 
