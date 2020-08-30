@@ -72,8 +72,6 @@ Clone project repository
 
 If you dont have cocoapods installed, install it and run the following command in the ``/Users/user/project_folders``:
 
-Install project pods:
-
 `$ pod install`
 
 After installing the pods you can open the project in Xcode and run it.
