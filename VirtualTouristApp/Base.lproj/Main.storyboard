@@ -244,7 +244,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="zrP-EG-Kr1"/>
                                         </constraints>
-                                        <state key="normal" title="Another Random Image">
+                                        <state key="normal" title="Random Image">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
