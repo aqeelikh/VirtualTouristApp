@@ -9,24 +9,32 @@
 import UIKit
 import MapKit
 import CoreData
+import Reachability
 
 class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
-
+    
     var dataController:DataController!
     var fetchedResultsController:NSFetchedResultsController<Pin>!
     var pins:[Pin] = []
     var lastLocation: [String: Double] = [:]
+    var reachability: Reachability!
+
     
     @IBOutlet weak var mapView: MKMapView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        mapView.delegate = self
         
-//        DispatchQueue.main.async {
-//               self.updateMapPins()
-//        }
+        do {
+               try reachability = Reachability()
+               NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged(_:)), name: Notification.Name.reachabilityChanged, object: reachability)
+               try reachability.startNotifier()
+               } catch {
+                    print("This is not working")
+        }
+        
+        mapView.delegate = self
         
         let fetchRequest:NSFetchRequest<Pin> = Pin.fetchRequest()
         if let result = try? dataController.viewContext.fetch(fetchRequest){
@@ -35,6 +43,7 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
             updateMapPins(pin: pins)
         }
         configrLongPressGestureForMap()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,5 +188,21 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
         lastLocation["regionLongitude"] = Double(mapView.region.span.longitudeDelta)
         
         UserDefaults.standard.set(lastLocation, forKey: "mapLastLocation")
+    }
+    
+    
+    
+    //MARK:- Pick a rondom Pin
+    
+    @IBAction func pickARandomPin(_ sender: Any) {
+        
+        if pins.isEmpty {
+            self.showAlert(message: "No Pins Downloaded")
+        }else{
+             let vcSugue = self.storyboard?.instantiateViewController(identifier: "randomPin") as! RandomPinViewController
+             vcSugue.dataController = self.dataController
+             vcSugue.pins = self.pins
+             self.show(vcSugue, sender: nil)
+        }
     }
 }

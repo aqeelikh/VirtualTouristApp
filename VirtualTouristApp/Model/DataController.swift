@@ -52,7 +52,6 @@ extension DataController {
     func autoSaveViewContext(interval:TimeInterval = 30) {
         guard interval > 0 else { print("cannot set a nagitve number")
             return }
-        print("autosaving")
         if viewContext.hasChanges {
             try? viewContext.save()
         }

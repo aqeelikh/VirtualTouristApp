@@ -23,15 +23,25 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
     var dataController: DataController!
     var fetchedResultsController:NSFetchedResultsController<Photo>!
 
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     var photoArray:[Photo] = []
     var response:FlickerPhotos!
+    
     
     @IBOutlet weak var flickerCollectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var updateCollectionViewBtn: UIButton!
     
-    override func viewDidLoad() {
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        spinner.startAnimating()
         
+    }
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         flickerCollectionView.delegate = self
@@ -44,6 +54,8 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
     
     
     @IBAction func collectionViewUpdateButton(_ sender: Any) {
+        
+        spinner.isHidden = false
         
         let photos: NSFetchRequest<Photo> = Photo.fetchRequest()
         photos.predicate = NSPredicate(format: "pin = %@", pin)
@@ -66,15 +78,16 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
         try? dataController.viewContext.save()
     }
     
-    //MARK:- TODO:- Refactor fetchImagesFromDB()
     func fetchImagesFromDB(){
-        
+                
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "pin = %@", pin)
         
         if let results = try? dataController.viewContext.fetch(fetchRequest), results.count != 0 {
                self.updateCollectionViewBtn.isEnabled = true
                photoArray = results
+               self.spinner.stopAnimating()
+            self.spinner.isHidden = true
            } else {
                fetchFlickerPhotos()
            }
@@ -84,7 +97,9 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
         
         let randomPage = Int.random(in: 1 ... 10)
         APIClient.getImages(latitude: annotation.coordinate.latitude, longtuid: annotation.coordinate.longitude, range: randomPage) { (result, error) in
+            
             guard let result = result else {
+                self.showAlert(message: error!.localizedDescription)
                 return
             }
             self.AsynchronousDownloadImage(response: result.photos)
@@ -108,26 +123,26 @@ class PhotoAlbumViewViewController: UIViewController, MKMapViewDelegate, UIColle
     func AsynchronousDownloadImage(response:FlickerPhotos) {
         
         let imageArray =  response.photo
-        
         for photo in imageArray {
             
-            let url = URL(string: "https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret).jpg" )
+            let FlickerUrl = URL(string: "https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret).jpg" )
             let imageView = UIImageView()
-            
-            imageView.kf.setImage(with: url) { (result, error, cache, url) in
-                if error == nil {
-                    //Convert photo to type compatibile to core data model
-                    let imageData = result!.pngData()!
-                    self.savePhoto(imageData, url!)
-                } else {
-                    self.showAlert(message: error?.localizedDescription ?? "error")
+            imageView.kf.setImage(with: FlickerUrl) { (result, error, cache, url) in
+                guard let result = result else {
+                    self.showAlert(message: error!.localizedDescription)
+                    return
                 }
+                let imageData = result.pngData()!
+                self.savePhoto(imageData, url!)
             }
         }
+        
         if imageArray.count == 0 {
                 showAlert(message: "No images to load choose another location")
         }
         self.updateCollectionViewBtn.isEnabled = true
+        self.spinner.isHidden = true
+
     }
     
     //MARK: Core Data
