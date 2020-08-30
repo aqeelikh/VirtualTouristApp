@@ -9,6 +9,7 @@
 
 [![Swift Version][swift-image]][swift-url]
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/EZSwiftExtensions.svg)](https://img.shields.io/cocoapods/v/LFAlertController.svg)  
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/EZSwiftExtensions.svg)](https://img.shields.io/cocoapods/v/LFAlertController.svg)  
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 
 
@@ -61,9 +62,11 @@ Random Pin View: After the user adds location pins to the `Mapview` it will sear
 ## Installation
 
 Open terminal and change you current directory
+
 `$ cd /Users/user/project_folders`
 
 Clone project repository
+
 `$ git clone https://github.com/aqeelikh/VirtualTouristApp`
 
 #### CocoaPods
@@ -74,3 +77,13 @@ platform :ios, '8.0'
 pod 'Kingfisher', '~> 5.0'
 pod 'ReachabilitySwift'
 ``` 
+
+
+[swift-image]:https://img.shields.io/badge/swift-5.0-orange.svg
+[swift-url]: https://swift.org/
+[license-image]: https://img.shields.io/badge/License-MIT-blue.svg
+[license-url]: LICENSE
+[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
+[codebeat-image]: https://codebeat.co/badges/c19b47ea-2f9d-45df-8458-b2d952fe9dad
+[codebeat-url]: https://codebeat.co/projects/github-com-vsouza-awesomeios-com
