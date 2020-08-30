@@ -9,15 +9,19 @@
 import UIKit
 import CoreData
 import MapKit
+import Reachability
 
 class RandomPinViewController: UIViewController,MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var pinRandomImage: UIImageView!
-    @IBOutlet weak var LocationInfoText: UITextView!
+    @IBOutlet weak var LocationInfoText: UILabel!
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mapView.delegate = self
         setupUI()
     }
@@ -28,19 +32,27 @@ class RandomPinViewController: UIViewController,MKMapViewDelegate {
     var pin:Pin?
     var photoArray:[Photo] = []
     var locationInformation:String = ""
+    var addressString:String = ""
+    
     
     func setupUI(){
+        
         pickARandomPin(pins: pins)
         addPinToMapView(pin: self.pin!)
         fetchImagesFromDB()
         getAddressFromLatLon(Latitude: pin!.latitude, Longitude: pin!.longitude)
+        self.locationInformation = addressString
     }
     
     func pickARandomPin(pins:[Pin]){
         
+//        if photoArray.isEmpty{
+//            self.showAlert(message: "Cant find pin information, check your Internet connection ")
+//            LocationInfoText.text =  ""
+//        }
+        
         let randomPinIndex = Int.random(in: 0 ... pins.count-1)
         pin = pins[randomPinIndex]
-        print(pins[randomPinIndex])
     }
     
     func addPinToMapView(pin:Pin){
@@ -97,10 +109,11 @@ class RandomPinViewController: UIViewController,MKMapViewDelegate {
             photoArray = results
             let randomPhotoArrayIndex = Int.random(in: 0 ... photoArray.count-1)
             self.pinRandomImage.image = UIImage(data: photoArray[randomPhotoArrayIndex].image!)
+            self.LocationInfoText.text = self.addressString
         }else{
             pinRandomImage.image = UIImage(named: "Applogo")
             LocationInfoText.text = "No Data To Display about the current location"
-            print("no image to download")
+            self.showAlert(message:"No image to download")
         }
     }
     
@@ -132,11 +145,13 @@ class RandomPinViewController: UIViewController,MKMapViewDelegate {
 
         ceo.reverseGeocodeLocation(loc, completionHandler:
             {(placemarks, error) in
-                if (error != nil)
-                {
-                    print("reverse geodcode fail: \(error!.localizedDescription)")
+                
+                guard let checkPm = placemarks else {
+                    return
                 }
+                
                 let pm = placemarks! as [CLPlacemark]
+
 
                 if pm.count > 0 {
                     let pm = placemarks![0]
@@ -157,8 +172,7 @@ class RandomPinViewController: UIViewController,MKMapViewDelegate {
                     if pm.postalCode != nil {
                         addressString = addressString + pm.postalCode! + " "
                     }
-                    self.locationInformation = addressString
-                    print(addressString)
+                    self.LocationInfoText.text = addressString
               }
         })
 

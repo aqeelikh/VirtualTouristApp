@@ -9,19 +9,31 @@
 import UIKit
 import MapKit
 import CoreData
+import Reachability
 
 class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
-
+    
     var dataController:DataController!
     var fetchedResultsController:NSFetchedResultsController<Pin>!
     var pins:[Pin] = []
     var lastLocation: [String: Double] = [:]
+    var reachability: Reachability!
+
     
     @IBOutlet weak var mapView: MKMapView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        do {
+               try reachability = Reachability()
+               NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged(_:)), name: Notification.Name.reachabilityChanged, object: reachability)
+               try reachability.startNotifier()
+               } catch {
+                    print("This is not working")
+        }
+        
         mapView.delegate = self
         
         let fetchRequest:NSFetchRequest<Pin> = Pin.fetchRequest()
@@ -31,6 +43,7 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate, UIG
             updateMapPins(pin: pins)
         }
         configrLongPressGestureForMap()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -8,14 +8,34 @@
 
 import Foundation
 import UIKit
+import Reachability
 
 extension UIViewController{
     
+    
+
      func showAlert(message:String){
          let alertController = UIAlertController(title: "Virtual Tourist App", message: message, preferredStyle: .alert)
              alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
          self.present(alertController, animated: true, completion: nil)
              }
+    
+    
+    // MARK: Monitor Network Connectivity
+    @objc func reachabilityChanged(_ note: NSNotification) {
+        let reachability = note.object as! Reachability
+        if reachability.connection != .unavailable {
+        if reachability.connection == .wifi {
+        print("Reachable via WiFi")
+        } else {
+            print("Reachable via Cellular")
+        }
+        } else {
+            
+            self.showAlert(message: "Please check your internet connection")
+        }
+    }
+    
 }
 
 
@@ -39,3 +59,6 @@ extension UIViewController {
             return spinner
         }
 }
+
+
+
